@@ -20,6 +20,14 @@ Route::get('/users_posts', function(){
 		echo "<ul>";
 		foreach($user->posts as $post){
 			echo "<li>{$post->title}</li>";
+
+			if(count($post->tags) > 0){
+				echo "Tags:<ol>";
+				foreach($post->tags as $tag){
+					echo "<li>$tag->title</li>";
+				}
+				echo "</ol>";
+			}
 		}
 		echo "</ul>";
 	}

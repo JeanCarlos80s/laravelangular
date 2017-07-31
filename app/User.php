@@ -40,4 +40,16 @@ class User extends Model implements AuthenticatableContract,
     public function posts(){
         return $this->hasMany('App\Post');
     }
+
+    public function comments(){
+        return $this->hasManyThrough('App\Comment', 'App\Post');
+    }
+
+    public function getChunkEmailAttribute(){
+        $arrayEmail = explode("@", $this->email);
+        if(count($arrayEmail) != 2) return $value;
+        $chunkEmail1 = substr($arrayEmail[0], 0, 2);
+        $chunkEmail2 = $arrayEmail[1];
+        return $chunkEmail1 . "...@" . $chunkEmail2;
+    }
 }
